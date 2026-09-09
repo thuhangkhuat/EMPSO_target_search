@@ -6,7 +6,7 @@ Thu Hang Khuat, Hai Trung Le, Manh Duong Phung,  "**Minimum Time Search of a Los
 
 ## Installation
 ```
-git@github.com:thuhangkhuat/PDE_target_search.git
+git@github.com:thuhangkhuat/EMPSO_target_search.git
 ```
 
 ## Run simulation
