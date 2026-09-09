@@ -10,7 +10,7 @@ git@github.com:thuhangkhuat/EMPSO_target_search.git
 ```
 
 ## Run simulation
-The current version have eight different scenarios, from 1 to 8. Before run each method, please change the value of `model` in file. To run our method:
+The current version have six different scenarios. Before run each method, please change the value of `model` in file. To run our method:
 1. Download all the source files from this repository.
 2. Open MATLAB.
 3. Execute the main script by running `EMPSO.m`.
