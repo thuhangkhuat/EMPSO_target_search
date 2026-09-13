@@ -19,7 +19,7 @@ To run our method:
 
 Below are visualizations of the method:
 
-| ![Scenario](scen_init.pdf) | ![Search path ](scen_path.pdf) |
+| ![Scenario](scen_init.png) | ![Search path ](scen_path.jpg) |
 |:---:|:---:|
 
 ## Citation
