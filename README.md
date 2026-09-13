@@ -19,13 +19,13 @@ To run our method:
 
 Below are visualizations of the method:
 
-| ![Scenario](scen.png) | ![Search path ](path.png) |
+| ![Scenario](scen_init.pdf) | ![Search path ](scen_path.pdf) |
 |:---:|:---:|
 
 ## Citation
 ```
 @ARTICLE{EMPSO2026,
-  author={Thu Hang Khuat, Hai Trung Le, Khanh Thanh Tran and Manh Duong Phung},
+  author={Thu Hang Khuat, Hai Trung Le, Khanh Thanh Tran, Thuy Pham and Manh Duong Phung},
   journal={PrePrint}, 
   title={Minimum Time Search of a Lost Target Using Multimodal Particle Swarm Optimization with Multiple Unmanned Aerial Vehicles}, 
   year={2026},

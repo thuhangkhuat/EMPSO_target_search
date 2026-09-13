@@ -5,7 +5,7 @@ close all;
 tic
 %% Problem Definition
 
-model = CreateModel(); % Create search map and parameters
+model = CreateModel6(); % Create search map and parameters
 PlotModel(model);
 
 CostFunction=@(x) MyCost(x,model);    % Cost Function
@@ -17,7 +17,7 @@ VarSize=[nVar 2];   % Size of Decision Variables Matrix
 VarMin=-model.MRANGE;           % Lower Bound of particles (Variables) (Neighbour weight)
 VarMax = model.MRANGE;           % Upper Bound of particles 
 
-N = 3;  % number of UAVs
+N = 5;  % number of UAVs
 %% PSO Parameters
 
 MaxIt=100;          % Maximum Number of Iterations
@@ -180,7 +180,7 @@ timeElapsed = toc
 %% Results
 % Plot Solution
 % Updade the map with target moves
-targetMoves = model.targetMoves; % total moves of target - Zero means static
+targetMoves = model.targetMoves-1; % total moves of target - Zero means static
 moveDir = DirToMove(model.targetDir);
 moveArr = targetMoves*moveDir;
 updatedMap = noncircshift(model.Pmap, moveArr); % Move left
@@ -199,3 +199,13 @@ xlabel('Iteration');
 ylabel('Final Best Cost');
 grid on;
 
+fileID = fopen('results/scen6_FinalBestCostData_2.txt','w');
+fprintf(fileID,'%4.4f\n',FinalBestCost);
+fclose(fileID);
+
+fileID = fopen('results/scen6_Path_2.txt','w');
+for k = 1:numel(bestPaths)
+    fprintf(fileID, 'Path %d:\n', k);
+    fprintf(fileID, '%4.4f %4.4f\n', bestPaths{k}');
+end
+fclose(fileID);
