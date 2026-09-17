@@ -2,7 +2,7 @@
 
 This repository presents the following article in MATLAB:
 
-Thu Hang Khuat, Hai Trung Le, Khanh Thanh Tran, Manh Duong Phung,  "**Minimum Time Search of a Lost Target Using Multimodal Particle Swarm Optimization with Multiple Unmanned Aerial Vehicles**", PrePrint, 2026
+Thu Hang Khuat, Hai Trung Le, Khanh Thanh Tran, Thuy Pham, Manh Duong Phung,  "**Minimum Time Search of a Lost Target Using Multimodal Particle Swarm Optimization with Multiple Unmanned Aerial Vehicles**", PrePrint, 2026
 
 ## Installation
 ```
