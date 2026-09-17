@@ -2,7 +2,7 @@
 % Create the searching map with initial belief
 %
 
-function model=CreateModel5()
+function model=CreateModel()
     
     % Create grid map
     MAP_SIZE = 40;
@@ -36,18 +36,6 @@ function model=CreateModel5()
 
     Pmap = F1+F2+F3+F4; % Standardise the map with two target info sources
     Pmap = Pmap/sum(Pmap(:));
- %   pcolor(X,Y,Pmap);
-   
- %{
-    %Plot probabilistic map
-    figure();
-    surf(x,y,Pmap);
-    caxis([min(Pmap(:))-.5*range(Pmap(:)),max(Pmap(:))]); % Set colour range
-    axis([0 MAP_SIZE 0 MAP_SIZE 0 max(Pmap(:))]);
-    xlabel('x'); ylabel('y'); zlabel('Probability Density');
-   %} 
-   
-    
     % Map limits
     xmin= -floor(MAP_SIZE/2);
     xmax= floor(MAP_SIZE/2);

@@ -5,7 +5,7 @@ close all;
 tic
 %% Problem Definition
 
-model = CreateModel6(); % Create search map and parameters
+model = CreateModel(); % Create search map and parameters
 PlotModel(model);
 
 CostFunction=@(x) MyCost(x,model);    % Cost Function
@@ -160,7 +160,7 @@ for it=1:MaxIt
 
     [paths, costs, totalCost] = GetPaths(particle, model,N);
 
-    BestCost(it)      = costs(1);   
+    if isempty(costs), BestCost(it) = model.n; else, BestCost(it) = costs(1); end  
     TotalBestCost(it) = totalCost;
     if totalCost < finalBestCost
         finalBestCost = totalCost;

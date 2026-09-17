@@ -1,32 +1,46 @@
+% Marginal-gain extraction of the fleet.
+% Return:
+%   paths     - selected fleet (cell array of decoded paths)
+%   costs     - running joint MTTD after each path is added
+%   totalCost - joint MTTD of the final fleet (the reported search time)
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 function [paths, costs, totalCost] = GetPaths(particle, model, N)
-    particleTable  = struct2table(particle);
-    sortedTable    = sortrows(particleTable, 'BestCost', 'ascend');
-    sortedParticle = table2struct(sortedTable);
-    nPop = numel(sortedParticle);
 
-    MaxNum = model.n + 1; 
+    nPop = numel(particle);
 
-    paths = {};
-    costs = [];
+    % Decode every personal best into a candidate path once.
+    cand = cell(nPop,1);
     for k = 1:nPop
-        if numel(paths) >= N
-            break;
-        end
-        candPath  = PathFromMotion(sortedParticle(k).BestPosition, model);
-        isOverlap = false;
-        for m = 1:numel(paths)
-            if CheckOverlap(candPath, paths{m})
-                isOverlap = true;
-                break;
-            end
-        end
-        if ~isOverlap
-            paths{end+1} = candPath;
-            costs(end+1) = sortedParticle(k).BestCost;
-        end
+        cand{k} = PathFromMotion(particle(k).BestPosition, model);
     end
 
-    nFound     = numel(paths);
-    nMissing   = N - nFound;
-    totalCost  = sum(costs) + nMissing * MaxNum;
+    paths   = {};
+    costs   = [];
+    chosen  = false(nPop,1);
+    curCost = JointCost({}, model);        % empty-fleet baseline = model.n
+
+    for slot = 1:N
+        bestGain = 0;                       % require strictly positive marginal gain
+        bestK    = -1;
+        bestCost = curCost;
+        for k = 1:nPop
+            if chosen(k), continue; end
+            trialCost = JointCost([paths, cand(k)], model);
+            gain      = curCost - trialCost;
+            if gain > bestGain
+                bestGain = gain;
+                bestK    = k;
+                bestCost = trialCost;
+            end
+        end
+        if bestK < 0                        % no remaining candidate improves the fleet
+            break;
+        end
+        paths{end+1} = cand{bestK};
+        costs(end+1) = bestCost;
+        chosen(bestK) = true;
+        curCost = bestCost;
+    end
+
+    totalCost = curCost;                    % joint MTTD of the selected fleet
 end
