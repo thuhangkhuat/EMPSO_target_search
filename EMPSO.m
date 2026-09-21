@@ -189,14 +189,3 @@ plot(FinalBestCost,'LineWidth',2);
 xlabel('Iteration');
 ylabel('Final Best Cost');
 grid on;
-
-fileID = fopen('results/scen6_FinalBestCostData_2.txt','w');
-fprintf(fileID,'%4.4f\n',FinalBestCost);
-fclose(fileID);
-
-fileID = fopen('result/scen1_Path_2.txt','w');
-for k = 1:numel(bestPaths)
-    fprintf(fileID, 'Path %d:\n', k);
-    fprintf(fileID, '%4.4f %4.4f\n', bestPaths{k}');
-end
-fclose(fileID);
