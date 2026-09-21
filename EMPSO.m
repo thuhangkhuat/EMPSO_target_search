@@ -99,8 +99,6 @@ for it=1:MaxIt
            nBestPosition = nBestPosition + randNums(j)*particle(nidx).BestPosition;
         end
         particle(i).nBestPosition = nBestPosition/(phi(i));
-        [costP,costT] = CostFunction(particle(i).nBestPosition);
-        particle(i).nBestCost = costT;   
      end
      newParticle = particle;
      for i=1:nPop
