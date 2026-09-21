@@ -5,7 +5,6 @@ function valid = CheckMotion(position, model)
     n=model.n;
     xs = model.xs;
     ys = model.ys;
-    path = zeros(n,2);  % Include n nodes, each node is (x,y)
     currentNode = [xs ys];
     valid = true;
     
@@ -19,15 +18,8 @@ function valid = CheckMotion(position, model)
             valid = false;
             return
         end            
-        path(i,:) = nextNode;
         currentNode = nextNode;
     end
    
-    % Check duplicate rows
-   [u,I,J] = unique(path, 'rows', 'first');
-    if size(u,1) < size(path,1)
-        valid = false;
-        return
-    end
 
 end

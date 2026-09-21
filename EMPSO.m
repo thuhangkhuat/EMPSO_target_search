@@ -30,12 +30,6 @@ beta_max=0.8;   % Upper Bound of Scaling Factor2
 
 pCR=0.8;        % Crossover Probability
 
-
-w=1;                % Inertia Weight
-wdamp=0.98;         % Inertia Weight Damping Ratio
-c1=2;             % Personal Learning Coefficient
-c2=2;             % Global Learning Coefficient
-
 alpha= 2;
 VelMax=alpha*(VarMax-VarMin);    % Maximum Velocity
 VelMin=-VelMax;                    % Minimum Velocity
@@ -96,7 +90,7 @@ for it=1:MaxIt
         sortedTable = sortrows(distTable, 'value');
         sortedDist = table2struct(sortedTable);
         % Calculate the best nearest neighbour lbest
-        nsize = 5;  % The number of neigbours used
+        nsize = 3;  % The number of neigbours used
         randNums = rand([1 nsize])*4.1/nsize;
         phi(i) = sum(randNums);
         nBestPosition = zeros(VarSize); 
@@ -104,7 +98,7 @@ for it=1:MaxIt
            nidx = sortedDist(j).index;
            nBestPosition = nBestPosition + randNums(j)*particle(nidx).BestPosition;
         end
-        particle(i).nBestPosition = nBestPosition/(phi(i)*nsize);
+        particle(i).nBestPosition = nBestPosition/(phi(i));
         [costP,costT] = CostFunction(particle(i).nBestPosition);
         particle(i).nBestCost = costT;   
      end
@@ -135,7 +129,7 @@ for it=1:MaxIt
         % Crossover
         for j=1:nVar
             if rand > pCR
-                newParticle(i).Position(j)=particle(i).Position(j);
+                newParticle(i).Position(j,:)=particle(i).Position(j,:);
             end
         end
 
@@ -167,9 +161,6 @@ for it=1:MaxIt
         bestPaths     = paths;       
     end
     FinalBestCost(it) = finalBestCost;
-
-    % Inertia Weight Damping
-    w=w*wdamp;
 
     % Show Iteration Information
     disp(['Iteration ' num2str(it) ': Best Cost = ' num2str(BestCost(it))]);
@@ -203,7 +194,7 @@ fileID = fopen('results/scen6_FinalBestCostData_2.txt','w');
 fprintf(fileID,'%4.4f\n',FinalBestCost);
 fclose(fileID);
 
-fileID = fopen('results/scen6_Path_2.txt','w');
+fileID = fopen('result/scen1_Path_2.txt','w');
 for k = 1:numel(bestPaths)
     fprintf(fileID, 'Path %d:\n', k);
     fprintf(fileID, '%4.4f %4.4f\n', bestPaths{k}');
